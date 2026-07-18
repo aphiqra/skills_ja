@@ -114,3 +114,12 @@ For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch us
 ### 5. Done
 
 Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later — re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
+
+### Language policy
+
+When creating or updating the target repository's `AGENTS.md` or `CLAUDE.md`, add a `## Language Policy` section with the following rules:
+
+- All user-facing communication must be in Japanese.
+- All deliverables must be written in Japanese by default, including specs, PRDs, issues, tickets, ADR summaries, implementation plans, review comments, and handoff notes.
+- Code, commands, file paths, package names, API names, identifiers, labels, and established technical terms may remain in English when that is clearer.
+- If the user explicitly requests another language, follow the user's request.

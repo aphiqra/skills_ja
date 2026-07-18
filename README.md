@@ -1,3 +1,15 @@
+これは、Matt Pocock 氏が公開している skill 用 GitHub レポジトリ（https://github.com/mattpocock/skills）を Fork したものです。
+
+日本語環境で使いやすくするために、いくつかの改良を加えています。主なポリシーは以下のとおりです。
+
+- skill の内容理解を深めるため、各 SKILL.md と同じ階層に日本語版の SKILL_ja.md を配置しています。（順次追加予定）
+- skills は英語版のまま使用し、ユーザーとの会話および成果物の出力のみ日本語で行います。（元の SKILL.md はコーディングエージェント向けの「制御文」であり、翻訳によるニュアンスの変化や訳語の揺れによって、条件分岐や強度が変わるリスクがあるためです。特に /tdd、/diagnose、/grill-with-docs、/to-spec、/to-tickets のような手順系スキルは、英語のまま使用するほうが安全です。）
+この方針について、以下のファイルに追記しています。
+  - CLAUDE.md
+  - skills/engineering/setup-matt-pocock-skills/SKILL.md
+- 
+
+
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
     <picture>
