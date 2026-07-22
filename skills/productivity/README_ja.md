@@ -1,17 +1,18 @@
 # Productivity
-  
-コード固有ではない、一般的な workflow tools です。
 
-## User-invoked
+コードに特化しない、一般的なワークフロー向けツールです。
 
-あなたが入力したときだけ到達できます（Claude Code: disable-model-invocation: true; Codex: agents/openai.yaml の policy.allow_implicit_invocation: false）。
+## User-invoked（ユーザが起動）
 
-- **[grill-me](./grill-me/SKILL.md)** — plan や design について、decision tree のすべての branch が解決されるまで徹底的に interview を受けます。
-- **[handoff](./handoff/SKILL.md)** — 現在の conversation を handoff document に圧縮し、別の agent が作業を続けられるようにします。
-- **[teach](./teach/SKILL.md)** — 現在の directory を stateful teaching workspace として使い、複数 sessions にわたって新しい skill や concept をユーザーに教えます。
-- **[writing-great-skills](./writing-great-skills/SKILL.md)** — skills をうまく書き、編集するための reference です：skill を predictable にする vocabulary と principles です。
+下記はユーザが明示的に呼び出した場合にのみ利用できます（Claude Code: `disable-model-invocation: true`; Codex: `policy.allow_implicit_invocation: false` in `agents/openai.yaml`）。
 
-## Model-invoked
-  
-Model または user が到達可能です（model がそれらを使えるように rich trigger phrasing があります）。
-- **[grilling](./grilling/SKILL.md)** — plan、decision、または idea について、decision tree のすべての branch が解決されるまでユーザーを徹底的に interview します。
+- **[grill-me](./grill-me/SKILL.md)** — 計画や設計について徹底的なインタビューを行い、意思決定ツリーのすべての分岐が解決されるまで掘り下げます。
+- **[handoff](./handoff/SKILL.md)** — 現在の会話を引き継ぎ用ドキュメントへ圧縮し、別のエージェントが作業を継続できるようにします。
+- **[teach](./teach/SKILL.md)** — 現在のディレクトリを状態保持型の学習環境として利用しながら、複数回のセッションにわたって新しいスキルや概念を学習者へ教えます。
+- **[writing-great-skills](./writing-great-skills/SKILL.md)** — 優れたスキルの作成・編集方法に関するリファレンスです。スキルを予測可能なものにするための語彙と原則を説明します。
+
+## Model-invoked（モデルが起動）
+
+下記はモデルまたはユーザーから呼び出し可能です（モデルが利用できるようトリガーフレーズが豊富に用意されています）。
+
+- **[grilling](./grilling/SKILL.md)** — 計画、意思決定、またはアイデアについて徹底的なインタビューを行い、意思決定ツリーのすべての分岐が解決されるまで掘り下げます。

@@ -1,14 +1,99 @@
-これは、Matt Pocock 氏が公開している skill 用 GitHub レポジトリ（https://github.com/mattpocock/skills）を Fork したものです。
+# skills_ja について
+これは、Matt Pocock 氏が公開している skill 用 GitHub リポジトリ（`https://github.com/mattpocock/skills`）を Fork したものです。
+
+## ポリシー
 
 日本語環境で使いやすくするために、いくつかの改良を加えています。主なポリシーは以下のとおりです。
 
-- skill の内容理解を深めるため、各 SKILL.md と同じ階層に日本語版の SKILL_ja.md を配置しています。（順次追加予定）
-- skills は英語版のまま使用し、ユーザーとの会話および成果物の出力のみ日本語で行います。（元の SKILL.md はコーディングエージェント向けの「制御文」であり、翻訳によるニュアンスの変化や訳語の揺れによって、条件分岐や強度が変わるリスクがあるためです。特に /tdd、/diagnose、/grill-with-docs、/to-spec、/to-tickets のような手順系スキルは、英語のまま使用するほうが安全です。）
-この方針について、以下のファイルに追記しています。
-  - CLAUDE.md
-  - skills/engineering/setup-matt-pocock-skills/SKILL.md
-- 
+- skill の内容理解を深めるため、各 `SKILL.md` と同じ階層に日本語版の `SKILL_ja.md` を配置しています。（順次追加予定）
+- skills は英語版のまま使用し、ユーザーとの会話および成果物の出力のみ日本語で行います。（元の `SKILL.md` はコーディングエージェント向けの「制御文」であり、翻訳によるニュアンスの変化や訳語の揺れによって、条件分岐や強度、精度が変わるリスクがあるためです。特に `/tdd`、`/diagnose`、`/grill-with-docs`、`/to-spec`、`/to-tickets` のような手順系スキルは、英語のまま使用するほうが安全です。）
 
+この方針について、以下のファイルに追記しています。
+  - `CLAUDE.md`
+  - `skills/engineering/setup-matt-pocock-skills/SKILL.md`
+
+   *　この2ファイルのみ本家と異なります。これ以外のファイルは本家のアップデートに追従します。（README.mdのみ手動で追従）<br>
+   *　`_ja.md` ファイルはこのリポジトリ特有のものです。これはskillの内容への理解を深めるものであって、skillコマンドとしての利用を想定していません。（AIによるざっくり翻訳です）<br>
+   *　`_ja.md` ファイルは本家のアップデートを追い掛けて更新していきますので、常に最新とは限りません。
+
+## セットアップ
+
+新規インストール<br>
+`npx skills@latest add aphiqra/skills_ja`
+
+全skill一括更新<br>
+`npx skills@latest update -g`
+
+特定のスキルだけ更新(例: code-review)<br>
+`npx skills@latest update code-review -g`
+
+対話でスコープを聞かれるのを省略したい場合<br>
+`npx skills@latest update -g -y`
+
+<br>
+
+## セットアップ（npxが使えないなど、例外の場合の手動設定）
+
+`link-skills.sh` と同じ「シンボリックリンクでフラット化」の考え方を、対象をホームディレクトリではなく `[プロジェクトフォルダ]/.claude/skills` に変えて設定します。
+
+ここでは下記のパスを例にしています：
+- cloneしてきたリポジトリ
+`/c/Users/xxx/Documents/git/skills_ja`
+
+- プロジェクトフォルダ
+`/c/Users/xxx/Documents/project/myproject`
+
+### 手順
+
+1. スキル定義をシンボリックリンクでプロジェクトに接続する
+
+Git Bash:
+
+```
+REPO="/c/Users/xxx/Documents/git/skills_ja"
+DEST="/c/Users/xxx/Documents/project/myproject/.claude/skills"
+mkdir -p "$DEST"
+
+for cat in engineering productivity; do
+  for d in "$REPO/skills/$cat"/*/; do
+    name="$(basename "$d")"
+    ln -sfn "$d" "$DEST/$name"
+  done
+done
+
+ls "$DEST"
+```
+
+PowerShell（管理者権限不要のジャンクション版）:
+
+```
+$Repo = "C:\Users\xxx\Documents\git\skills_ja\skills"
+$Dest = "C:\Users\xxx\Documents\project\myproject\.claude\skills"
+New-Item -ItemType Directory -Force $Dest | Out-Null
+
+foreach ($cat in "engineering","productivity") {
+  Get-ChildItem "$Repo\$cat" -Directory | ForEach-Object {
+    New-Item -ItemType Junction -Path "$Dest\$($_.Name)" -Target $_.FullName -Force | Out-Null
+  }
+}
+
+Get-ChildItem $Dest
+```
+
+2. Claude Code のセッションを再読み込みする
+新しくリンクしたスキルが認識されるよう、セッションを開始し直します（`.claude/skills/setup-matt-pocock-skills` などが直下に並んでいればOK）。
+
+3. `/setup-matt-pocock-skills` を実行する
+ここで初めてプロジェクトフォルダ直下に `CONTEXT.md`, `docs/agents/*.md`, `CLAUDE.md`（または `AGENTS.md`）が実体ファイルとして作られます。issue tracker・triage labels・domain docs 構成を対話で確認しながら進みます。
+
+4. 以降の更新
+skills_ja 側でツール自体を更新したい時は `git -C "C:\Users\xxx\Documents\git\skills_ja" pull` します。これでシンボリックリンク経由のプロジェクトフォルダのスキルも自動的に最新になります。プロジェクト固有の `CONTEXT.md` 等はツール自体とは独立したものとして、プロジェクトフォルダ側で自由に編集・バージョン管理できます。
+
+<br>
+<br>
+
+-----
+# 以下、本家の README.md です (日訳は [README_ja.md](./README_ja.md))
 
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
