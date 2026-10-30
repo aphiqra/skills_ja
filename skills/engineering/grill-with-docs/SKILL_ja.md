@@ -4,4 +4,4 @@ description: plan または design を磨き上げるための徹底的な inter
 disable-model-invocation: true
 ---
 
-`/domain-modeling` skill を使用して、`/grilling` session を実行します。
+Skill tool を 2 回呼び出します。"grilling" と "domain-modeling" です。
